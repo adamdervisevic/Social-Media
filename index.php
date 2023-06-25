@@ -36,22 +36,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Social Network</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="success"> <!-- zameniti nekim elementom iz bootstrapa -->
+<body>
+    <div class="success">
         <?php echo $poruka; ?>
     </div>
-    <!-- slider, pozadinska slika, ... -->
     <h1>Welcome, <?php echo $username ?>, to our Social Network!</h1>
     <?php if (!isset($_SESSION["username"])) { ?>
         <p>New to our site? <a href="register.php">Register here</a> to access our site!</p>
-        <p>Already have the account? <a href="login.php">Login here</a> to continue to our site!</p>
+        <p>Already have an account? <a href="login.php">Login here</a> to continue to our site!</p>
     <?php } else { ?>
         <p><?php echo $m ?> a <a href="profile.php">profile</a>.</p>
         <p>See other members <a href="followers.php">here</a>.</p>
         <p><a href="logout.php">Logout</a> from our site.</p>
     <?php } ?>
-    
+</body> 
 </body>
 </html>

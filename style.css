@@ -1,80 +1,30 @@
 .error {
     color: red;
 }
-
-.success {
+.alert-success {
     color: green;
 }
-
-table {
-    border: 1px solid black;
-    margin: 10px;
-}
-
-img {
-    width: 200px;
-    height: 200px;
-}
-
-ul {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
-}
-
-li {
-    padding: 10px;
-    background-color: #f2f2f2;
-    margin-bottom: 10px;
-    border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    font-family: Arial, sans-serif;
-    color: #333;
-    cursor: pointer; /* Dodatna promena - menja kursor u ruci prilikom hovera */
-}
-
-li:hover {
-    background-color: #e0e0e0;
-}
-
-ul a {
-    text-decoration: none;
-    color: black;
-    display: block
-}
-
 body {
-    font-family: 'Open Sans', sans-serif;
-    background-color: #f5f5f5;
-    padding: 20px;
+    background-color: rgba(35, 39, 45, 255);
+    font-family: "Roboto Mono", monospace;
+    font-weight: 500;
+    color: #33ffa9;
 }
-
-.container {
-    max-width: 800px;
-    margin: 0 auto;
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-h1 {
-    color: #333;
-    font-size: 28px;
-    margin-top: 0;
-    margin-bottom: 20px;
-}
-
-p {
-    color: #666;
-    margin-bottom: 10px;
-}
-
-a {
-    color: #007bff;
+.nav-link, a {
+    color: white;
     text-decoration: none;
 }
-
 a:hover {
-    text-decoration: underline;
+    color: #33ffa9;
+}
+.nav-link:hover {
+    color: #33ffa9;
+}
+.greeting {
+    color: green;
+}
+.profile-table {
+    border: 1px solid black;
+    padding: 10px;
+    border-collapse: collapse;
 }

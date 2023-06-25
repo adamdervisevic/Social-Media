@@ -7,9 +7,8 @@
         `username` VARCHAR(255) NOT NULL UNIQUE,
         `password` VARCHAR(255) NOT NULL,
         PRIMARY KEY(`id`)
-        ) ENGINE = InnoDB;
-                ";
-
+        ) ENGINE = InnoDB;";
+        
         $sql .= "CREATE TABLE IF NOT EXISTS `profiles`(
         `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
         `first_name` VARCHAR(255) NOT NULL,
@@ -22,8 +21,7 @@
                 ON UPDATE CASCADE ON DELETE NO ACTION
         ) ENGINE = InnoDB;
                 ";
-
-
+        
         $sql .= "CREATE TABLE IF NOT EXISTS `followers`(
                 `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
                 `id_sender` INT UNSIGNED NOT NULL, 
@@ -35,18 +33,11 @@
                         ON UPDATE CASCADE ON DELETE NO ACTION
                 ) ENGINE = InnoDB;
                 ";
-        $sql = "ALTER TABLE `profiles`
-        ADD COLUMN `image` VARCHAR(255)";
 
-        $sql = "ALTER TABLE `profiles`
-                MODIFY COLUMN `image` BLOB";
+        $sql = "ALTER TABLE `profiles` ADD `image` VARCHAR(255)";
 
-        $sql = "ALTER TABLE `followers`
-                ADD COLUMN `avatar` BLOB";
+        $sql = "ALTER TABLE `followers` ADD `avatar` VARCAHR(255)";
 
-        $sql = "ALTER TABLE `profiles`
-                MODIFY COLUMN `image` VARCHAR(255)";
-                
         if($conn->multi_query($sql))
         {
         echo "<p>Tables created successfully</p>";
@@ -55,4 +46,5 @@
         {
         header("Location: error.php?m=" . $conn->error);
         }
+        
 ?>

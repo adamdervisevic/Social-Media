@@ -11,8 +11,6 @@
 
     $uploadDirectory = 'uploads/';
 
-    
-
     $sucMessage = "";
     $errMessage = "";
 
@@ -30,6 +28,7 @@
         $gender = $profileRow["gender"];
         $dob = $profileRow["dob"];
         $image = $profileRow["image"];
+        $bio = $profileRow["bio"];
     }
 
     if ($_SERVER["REQUEST_METHOD"] == "POST")
@@ -39,6 +38,7 @@
         $gender = $conn->real_escape_string($_POST["gender"]);
         $dob = $conn->real_escape_string($_POST["dob"]);
         $image = $conn->real_escape_string($_FILES["profile-image"]["name"]);
+        $bio = $conn->real_escape_string($_POST["bio"]);
 
         // Vrsimo validaciju polja
         $firstNameError = nameValidation($firstName);
@@ -54,9 +54,9 @@
             $q = "";
             if ($profileRow === false)
             {
-                $q = "INSERT INTO `profiles`(`first_name`, `last_name`, `gender`, `dob`, `id_user`)
+                $q = "INSERT INTO `profiles`(`first_name`, `last_name`, `gender`, `dob`, `id_user`, `bio`)
                     VALUE
-                    ('$firstName', '$lastName', '$gender', '$dob', $id)";
+                    ('$firstName', '$lastName', '$gender', '$dob', $id, $bio)";
             }
             else
             {
@@ -64,7 +64,8 @@
                     SET `first_name` = '$firstName',
                     `last_name` = '$lastName',
                     `gender` = '$gender',
-                    `dob` = '$dob'
+                    `dob` = '$dob',
+                    `bio` = '$bio'
                     WHERE `id_user` = $id
                     ";
             }
@@ -166,6 +167,13 @@
             <input type="date" name="dob" id="dob" value="<?php echo $dob; ?>">
             <span class="error"><?php echo $dobError; ?></span>
         </p>
+        <p>
+        <p>
+            <label for="bio">Bio:</label>
+            <textarea name="bio" id="bio" cols="30" rows="10"><?php echo $bio; ?></textarea>
+        </p>
+        </p>
+
         <p>
             <?php
                 $poruka;

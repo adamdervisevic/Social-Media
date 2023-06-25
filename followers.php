@@ -36,27 +36,40 @@
         $conn->query($q);
     }
     
-    $query = "SELECT * FROM `followers`";
-    $result = $conn->query($query);
+    $query = "SELECT u.id, u.username, p.first_name, p.image, p.gender FROM users AS u LEFT JOIN profiles AS p ON u.id = p.id_user WHERE u.id != ? ORDER BY p.first_name";
 
-    while ($row = $result->fetch_assoc()) {
-        $avatar = $row["avatar"];
-        $gender = getGender($row["id_receiver"], $conn);
-
-        if (empty($avatar) || $avatar == "default") {
-            if ($gender == "m") {
-                $avatar = "images/male_avatar.png";
-            } elseif ($gender == "f") {
-                $avatar = "images/female_avatar.png";
+    $stmt = $conn->prepare($query);
+    $stmt->bind_param("i", $id); // Assuming $id is an integer
+    $stmt->execute();
+    $result = $stmt->get_result();
+    
+    $avatars = []; // array to store avatar paths
+    
+    if ($result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+            
+            if (!empty($row['image'])) {
+                $avatar = $row['image'];
             } else {
-                $avatar = "images/other_avatar.png";
+                switch ($row['gender']) {
+                    case 'm':
+                        $avatar = "images/male_avatar.png";
+                        break;
+                    case 'f':
+                        $avatar = "images/female_avatar.jpg";
+                        break;
+                    case 'o':
+                        $avatar = "images/other_avatar.jpg";
+                        break;
+                    default:
+                        $avatar = "images/default_avatar.jpg"; 
+                }
             }
+            $avatars[$row['id']] = $avatar; 
         }
-
-        echo "<div>";
-        echo "<img src='$avatar' alt='Avatar'>";
-        echo "</div>";
     }
+    
+    
 
     //Odredimo koje druge korisnike prati logovan korisnik
     $upit1 = "SELECT `id_receiver` FROM `followers` WHERE `id_sender` = $id";
@@ -108,25 +121,39 @@
                 echo "<tr><td>";
                 if($row["full_name"] !== NULL)
                 {
-                    echo $row["full_name"];
+                    echo "<a href='show_profile.php?id=".$row['id']."'>".$row["full_name"]."</a>";
                 }
                 else 
                 {
-                    echo $row["username"];
+                    echo "<a href='show_profile.php?id=".$row['id']."'>".$row["username"]."</a>";
                 }
                 echo "</td><td>";
                 // Ovde cemo linkove za pracenje korisnika
                 $friendId = $row["id"];
-                if(!in_array($friendId, $niz1)) {
-                    if(!in_array($friendId, $niz2)) {
-                        $text = "Follow";
-                    } else {
-                        $text = "Follow back";
-                    }
-                    echo "<a href='followers.php?friend_id=$friendId'>$text</a>";
-                } else {
-                    echo "<a href='followers.php?unfriend_id=$friendId'>Unfollow</a>";
-                }
+
+    if (!in_array($friendId, $niz1)) {
+        if (!in_array($friendId, $niz2)) {
+            $text = "Follow";
+            // Since you're not following yet, avatar is hidden
+            echo "<a href='followers.php?friend_id=$friendId'>$text</a>";
+        } else {
+            $text = "Follow back";
+            // If you've been followed by this friend, you can see their avatar
+            echo "<a href='followers.php?friend_id=$friendId'>$text</a>";
+            if (isset($avatars[$friendId])) {
+                $avatar = $avatars[$friendId];
+                echo "<img id='avatar-$friendId' src='$avatar'>";
+            }
+        }
+    } else {
+        // If you're following, avatar is visible, clicking on 'Unfollow' will hide avatar
+        echo "<a href='followers.php?unfriend_id=$friendId'>Unfollow</a>";
+        if (isset($avatars[$friendId])) {
+            $avatar = $avatars[$friendId];
+            echo "<img id='avatar-$friendId' src='$avatar'>";
+        }
+    }
+
                 echo "</td></tr>";
             }
             

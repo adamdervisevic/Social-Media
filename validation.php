@@ -13,9 +13,9 @@
         {
             return "Username cannot contain spaces";
         }
-        elseif (strlen($u) < 5 || strlen($u) > 25)
+        elseif (strlen($u) < 4 || strlen($u) > 25)
         {
-            return "Username must be between 5 and 25 characters";
+            return "Username must be between 4 and 25 characters";
         }
         elseif ($result->num_rows > 0)
         {
