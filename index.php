@@ -36,23 +36,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Social Network</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 <body>
-    <div class="success">
-        <?php echo $poruka; ?>
-    </div>
-    <h1>Welcome, <?php echo $username ?>, to our Social Network!</h1>
-    <?php if (!isset($_SESSION["username"])) { ?>
-        <p>New to our site? <a href="register.php">Register here</a> to access our site!</p>
-        <p>Already have an account? <a href="login.php">Login here</a> to continue to our site!</p>
-    <?php } else { ?>
-        <p><?php echo $m ?> a <a href="profile.php">profile</a>.</p>
-        <p>See other members <a href="followers.php">here</a>.</p>
-        <p><a href="logout.php">Logout</a> from our site.</p>
-    <?php } ?>
+    <div class="container my-4">
+        <div class="success">
+            <?php echo $poruka; ?>
+        </div>
+        <h1>Welcome, <?php echo $username ?>, to our Social Network!</h1>
+        <?php if (!isset($_SESSION["username"])) { ?>
+            <p>New to our site? <a href="register.php">Register here</a> to access our site!</p>
+            <p>Already have an account? <a href="login.php">Login here</a> to continue to our site!</p>
+        <?php } else { ?>
+            <p><?php echo $m ?> a <a href="profile.php">profile</a>.</p>
+            <p>See other members <a href="followers.php">here</a>.</p>
+            <p><a href="logout.php">Logout</a> from our site.</p>
+        <?php } ?>
+    <div class="container my-4">
 </body> 
 </body>
 </html>
