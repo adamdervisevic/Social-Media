@@ -52,7 +52,7 @@
         <?php } else { ?>
             <p><?php echo $m ?> a <a href="profile.php">profile</a>.</p>
             <p>See other members <a href="followers.php">here</a>.</p>
-            <p><a href="logout.php">Logout</a> from our site.</p>
+            <p><a href="logout.php">Logout</a> from our site...</p>
         <?php } ?>
     <div class="container my-4">
 </body> 
