@@ -170,7 +170,7 @@
         <p>
         <p>
             <label for="bio">Bio:</label>
-            <textarea name="bio" id="bio" cols="30" rows="10"><?php echo $bio; ?></textarea>
+            <textarea name="bio" id="bio" cols="30" rows="10"><?php echo htmlspecialchars($bio); ?></textarea>
         </p>
         </p>
 
